@@ -9,8 +9,10 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-RUN curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | python
-ADD Pipfile.lock /app/
+RUN pip install pipenv
+ADD Pipfile /app/
+#ADD pipenv lock
+#ADD Pipfile.lock /app/
 WORKDIR /app
 RUN pipenv install --system --deploy --dev
 
