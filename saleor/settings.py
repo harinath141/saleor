@@ -226,7 +226,8 @@ INSTALLED_APPS = [
     'django_prices_vatlayer',
     'graphene_django',
     'mptt',
-    'payments',
+    'django_payments_cod',
+    #'payments',
     'webpack_loader',
     'social_django',
     'django_countries',
@@ -343,7 +344,8 @@ PAYMENT_HOST = get_host
 PAYMENT_MODEL = 'order.Payment'
 
 PAYMENT_VARIANTS = {
-    'default': ('payments.dummy.DummyProvider', {})}
+    'default': ('django_payments_cod.CODProvider', {})}
+
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
@@ -353,13 +355,13 @@ if not CACHES['default']['BACKEND'].endswith('LocMemCache'):
     SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 CHECKOUT_PAYMENT_CHOICES = [
-    ('default', 'Dummy provider')]
+    ('default', 'Cash On Delivery')]
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'}
 
 LOW_STOCK_THRESHOLD = 10
-MAX_CART_LINE_QUANTITY = int(os.environ.get('MAX_CART_LINE_QUANTITY', 50))
+MAX_CART_LINE_QUANTITY = int(os.environ.get('MAX_CART_LINE_QUANTITY', 5000))
 
 PAGINATE_BY = 16
 DASHBOARD_PAGINATE_BY = 30
